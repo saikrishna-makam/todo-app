@@ -2,8 +2,8 @@ var currentUser = sessionStorage.getItem("user");
 var currentUserData = JSON.parse(localStorage.getItem(currentUser));
 
 var todoListView = document.getElementById("todo-list");
-var modal = document.getElementById("add-item-dialogue");
-var btn = document.getElementById("add-item-btn");
+var addTaskDialogue = document.getElementById("add-item-dialogue");
+var addTaskBtn = document.getElementById("add-item-btn");
 var span = document.getElementsByClassName("close")[0];
 
 function showTodoList() {
@@ -16,9 +16,9 @@ function showTodoList() {
     todoList.forEach((element, index) => {
 
         if(element.done === "Yes") {
-            listTag += `<li><input id="task-done${index}" type="checkbox" checked>${element.title}<span class="icon" onclick="deleteTask(${index})"><i class="fas fa-trash"></i></span></li>`;
+            listTag += `<li onclick="editTodoTask(${index})><input class="task-done" type="checkbox" checked>${element.title}<span class="icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
         } else {
-            listTag += `<li><input id="task-done${index}" type="checkbox" checked>${element.title}<span class="icon" onclick="deleteTask(${index})"><i class="fas fa-trash"></i></span></li>`;
+            listTag += `<li onclick="editTodoTask(${index})"><input class="task-done" type="checkbox">${element.title}<span class="icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
         }
     });
     todoListView.innerHTML = listTag;
@@ -27,8 +27,8 @@ function showTodoList() {
 showTodoList();
 
 
-btn.onclick = function() {
-    modal.style.display = "block";
+addTaskBtn.onclick = function() {
+    addTaskDialogue.style.display = "block";
     var date = document.getElementById("date");
     var reminderDate = document.getElementById("reminder-date");
     var today = new Date();
@@ -48,9 +48,7 @@ window.onclick = function(event) {
     }
 }
 
-
 function hideReminderDate() {
-
     var reminderDate = document.getElementById("reminder-date");
     let reminderCheck = (function() {
         var reminderVal = document.getElementsByName("reminder");
@@ -110,7 +108,10 @@ function addTodoTask() {
     task["priority"] = priority;
     task["public"] = todoPublic;
     task["reminder"] = reminder;
-    task["reminderdate"] = reminderDate.value;
+    if(reminder == "Yes")
+        task["reminderdate"] = reminderDate.value;
+    else
+        task["reminderdate"] = "";
     task["done"] = done;
     task["taskimageurl"] = getBase64Image(taskimage);
     

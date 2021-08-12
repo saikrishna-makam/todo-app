@@ -256,3 +256,44 @@ header .navigation .menu-list li a {
 .space-between {
     margin-left: 10px;
 }
+
+#todo-list {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+#todo-list li {
+    position: relative;
+    list-style: none;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 0.2px solid white;
+    background: #f2f2f2;
+    border-radius: 3px;
+    padding: 0 15px;
+    cursor: default;
+    overflow: hidden;
+}
+
+#todo-list li:hover {
+
+}
+
+#todo-list li .icon {
+    position: absolute;
+    right: 0px;
+    width: 45px;
+    text-align: center;
+    color: #FF0000;
+    border-radius: 0 3px 3px 0;
+    cursor: pointer;
+}
+
+#todo-list li .icon:hover {
+    color: #FFFFFF;
+    background: #e74c3c;
+}
+
+.task-done {
+    margin-right: 10px;
+}

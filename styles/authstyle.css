@@ -267,7 +267,7 @@ header .navigation .menu-list li a {
     list-style: none;
     height: 45px;
     line-height: 45px;
-    margin-bottom: 8px;
+    border-bottom: 0.2px solid white;
     background: #f2f2f2;
     border-radius: 3px;
     padding: 0 15px;
@@ -275,18 +275,25 @@ header .navigation .menu-list li a {
     overflow: hidden;
 }
 
-#todo-list li .icon {
-    position: absolute;
-    right: -45px;
-    background: #e74c3c;
-    width: 45px;
-    text-align: center;
-    color: #fff;
-    border-radius: 0 3px 3px 0;
-    cursor: pointer;
-    transition: all 0.2s ease;
+#todo-list li:hover {
+    background: #ddd;
 }
 
-#todo-list li:hover .icon {
+#todo-list li .icon {
+    position: absolute;
     right: 0px;
+    width: 45px;
+    text-align: center;
+    color: #FF0000;
+    border-radius: 0 3px 3px 0;
+    cursor: pointer;
+}
+
+#todo-list li .icon:hover {
+    color: #FFFFFF;
+    background: #e74c3c;
+}
+
+.task-done {
+    margin-right: 10px;
 }
