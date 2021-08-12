@@ -127,3 +127,11 @@ function addTodoTask() {
         console.log("Storage failed: " + e);
     }
 }
+
+function deleteTodoTask(index) {
+    currentUserData['todos'].splice(index, 1);
+    localStorage.setItem(currentUserData.email, JSON.stringify(currentUserData));
+    showTodoList();
+}
+
+

@@ -16,7 +16,7 @@ function showTodoList() {
     todoList.forEach((element, index) => {
 
         if(element.done === "Yes") {
-            listTag += `<li onclick="editTodoTask(${index})><input class="task-done" type="checkbox" checked>${element.title}<span class="icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
+            listTag += `<li onclick="editTodoTask(${index})"><input class="task-done" type="checkbox" checked>${element.title}<span class="icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
         } else {
             listTag += `<li onclick="editTodoTask(${index})"><input class="task-done" type="checkbox">${element.title}<span class="icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
         }
@@ -127,3 +127,11 @@ function addTodoTask() {
         console.log("Storage failed: " + e);
     }
 }
+
+function deleteTodoTask(index) {
+    currentUserData['todos'].splice(index, 1);
+    localStorage.setItem(currentUserData.email, JSON.stringify(currentUserData));
+    showTodoList();
+}
+
+

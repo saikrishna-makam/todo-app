@@ -276,7 +276,7 @@ header .navigation .menu-list li a {
 }
 
 #todo-list li:hover {
-
+    background: #ddd;
 }
 
 #todo-list li .icon {
