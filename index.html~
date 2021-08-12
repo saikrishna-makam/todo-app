@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles/authstyle.css">
+    </head>
+    <body>
+        <header>
+            <nav class="navigation">
+                <div class="logo">
+                    <h1>Todo</h1>
+                </div>
+                
+                <ul class="menu-list">
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="login.html" onclick="sessionStorage.clear();">Log Out</a></li>
+                </ul>
+                
+                <div class="humberger">
+                    <div class="bar"></div>       
+                    <div class="bar2 bar"></div>
+                    <div class="bar"></div>         
+                </div>
+            </nav>
+            
+            <button id="add-item-btn">Open Modal</button>
+
+            <div id="add-item-dialogue" class="add-item-dialogue">
+                <div class="add-item-dialogue-content">
+                    <div class="add-item-dialogue-header">
+                        <span class="close">&times;</span>
+                        <h2>Add Task</h2>
+                    </div>
+                    <form name="signupform" action="index.html" onsubmit="addTodoTask()">
+                        <div class="add-item-dialogue-body">                      
+                            <div class="row first-row">
+                                <label for="title">Title</label>
+                                <input id="title" type="text" placeholder="Enter your todo" name="title">
+                            </div>
+                            <div class="row">
+                                <label for="date">Date</label>
+                                <div>
+                                    <input id="date" type="date" name="date">
+                                </div>
+                            </div>
+                            <div class="row priorities">
+                                Priority
+                                <label class="space-between" for="do-now">
+                                    <input id="do-now" type="checkbox" value="do-now" name="priority">
+                                    Do now
+                                </label>
+                                <label class="space-between" for="do-tomorrow">
+                                    <input id="do-tomorrow" type="checkbox" value="do-tomorrow" name="priority">
+                                    Do tomorrow
+                                </label>
+                                <label class="space-between" for="do-soon">
+                                    <input id="do-soon" type="checkbox" value="do-soon" name="priority">
+                                    Do soon
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div id="radio-group">
+                                    Public
+                                    <label class="space-between" for="public">
+                                        <input id="public-yes" type="radio" value="Yes" name="public" checked>
+                                        Yes
+                                    </label>
+                                    <label class="space-between" for="public">
+                                        <input id="public-no" type="radio" value="No" name="public">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="radio-group">
+                                    Reminder
+                                    <label class="space-between" for="reminder">
+                                        <input id="reminder-yes" type="radio" value="Yes" onchange="hideReminderDate()" name="reminder" checked>
+                                        Yes
+                                    </label>
+                                    <label class="space-between" for="reminder">
+                                        <input id="reminder-no" type="radio" onchange="hideReminderDate()" value="No" name="reminder">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="reminder-date">Remind on</label>
+                                <div>
+                                    <input id="reminder-date" type="date" name="reminder-date">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="task-done">Done</label>
+                                <input id="task-done" type="checkbox" class="space-between" value="Yes" name="task-done">
+                            </div>
+                            <div class="row">
+                                <label for="upload-file">Upload file</label>
+                                <div>
+                                    <input id="upload-file" type="file" accept="image/*" onchange="readURL(this);" name="upload-file"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="preview-label">Preview</div>
+                                <img id="preview-img" src="http://placehold.it/180" alt="User Picture" name="user-img"/>
+                            </div>
+                            <hr>
+                            <button class="button" type="submit">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <ul id="todo-list">
+                
+            </ul>
+            
+            
+        </header>
+        <script src="scripts/authscript.js"></script>
+        <script src="scripts/todo.js"></script>
+    </body>
+</html>

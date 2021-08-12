@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles/authstyle.css">
+    </head>
+    <body>
+        <form name="signupform" action="login.html" onsubmit="return validateSignup(document.signupform.email, document.signupform.password, document.signupform.confirmpassword)">
+            <div class="container">
+                <h1>Sign up</h1>
+                <hr>
+                <div class="row first-row">
+                    <label for="email">Email</label>
+                    <input id="email" type="text" placeholder="Enter Email Id" name="email">
+                    <div class="error" id="signupemailerror"></div>
+                </div>
+                <div class="row">
+                    <label for="firstname">First name</label>
+                    <input id="firstname" type="text" placeholder="Enter First Name" name="firstname" >
+                </div>
+                <div class="row">
+                    <label for="lastname">Last name</label>
+                
+                    <input id="lastname" type="text" placeholder="Enter Last Name" name="lastname" >
+                </div>
+                <div class="row">
+                    <div id="radio-group">
+                        <label>Gender</label>
+                            <label for="gender">
+                            <input id="male" type="radio" value="Male" name="gender" checked>
+                            Male
+                            </label>
+                            <label for="gender">
+                            <input id="female" type="radio" value="Female" name="gender">
+                            Female
+                        </label>
+                    </div>
+                </div>
+                <label id="address-label" for="address">Address</label>
+                <textarea id="address" name="address" rows="4" cols="50" required></textarea>
+                <div class="row">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" placeholder="Enter Password" name="password">
+                    <div class="error" id="signuppassworderror"></div>
+                </div>
+                <div class="row">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input id="confirm-password" type="password" placeholder="Enter Password Again" name="confirmpassword">
+                    <div class="error" id="signupconfirmpassworderror"></div>
+                </div>
+                <div class="row">
+                    <label for="upload-file">Upload file</label>
+                    <div>
+                        <input type="file" accept="image/*"  onchange="readURL(this);"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="preview-label">Preview</div>
+                    <img id="user-img" src="http://placehold.it/180" alt="User Picture" name="user-img"/>
+                </div>
+                <hr>
+                <button class="button register-btn" type="submit">Sign up</button>
+            </div>
+            <div class="container signin">
+                <p>Already have an account? <a href="#">Sign in</a>.</p>
+            </div>
+        </form>
+        <script src="scripts/authscript.js"></script
+    </body>
+</html>

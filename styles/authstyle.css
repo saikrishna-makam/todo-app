@@ -1,0 +1,292 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body {
+  min-width: 100%;
+  overflow-x: hidden;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    padding: 16px;
+    background-color: white;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+.button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.button:hover {
+    opacity: 1;
+}
+
+a {
+    color: dodgerblue;
+}
+
+.signin {
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
+#address {
+    resize: none;
+}
+
+#address-label {
+  display: block;
+}
+
+textarea {
+  margin: 5px 0 22px 0;
+  display: block;
+}
+
+.error {
+    color: red;
+    font-size: 90%;
+}
+
+.row {
+    margin: 5px 0 22px 0;
+    padding-bottom: 10px;
+}
+
+.first-row {
+    margin-top: 22px;
+}
+
+hr {
+    margin-bottom: 10px;
+}
+
+header .navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  min-height: 10vh;
+  min-width: 100%;
+  z-index: 10;
+  background: #0f1423;
+  border-bottom: 2px solid #0c2d48;
+}
+
+header .navigation .logo {
+  margin-left: 20px;
+}
+
+header .navigation .logo h1 {
+  color: #b1d4e0;
+  font-size: 30px;
+  line-height: 38px;
+}
+
+header .navigation .menu-list {
+  list-style: none;
+  display: flex;
+  margin: auto 20px auto 0;
+  margin-left: auto;
+}
+
+header .navigation .humbarger {
+  margin-right: 20px;
+  display: none;
+ }
+ 
+header .navigation .humbarger .bar {
+  width: 30px;
+  height: 2px;
+  margin: 7px;
+  background: #b1d4e0;
+ }
+
+header .navigation .menu-list li a {
+  color: #b1d4e0;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: color 1s ease, border 1s ease;
+  text-decoration: none;
+}
+
+#preview-label {
+    margin-top: 22px;
+}
+
+#preview-img {
+    width: 200px;
+    height: 240px;  
+    margin-top: 10px;
+    display: block;  
+    object-fit: cover;
+}
+
+.container .profile-image {
+    width: 150px !important; 
+    height: 150px !important; 
+    display: block;
+    object-fit: cover;
+    margin: auto;
+    border: 10px solid #ccc;
+    border-radius: 50%;
+}
+
+#change-picture-label-row {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#change-picture-label {
+    font-size: 16px;
+    color: dodgerblue;
+    cursor: pointer;
+}
+
+#change-picture {
+   opacity: 1;
+   position: absolute;
+   z-index: -1;
+}
+
+.add-item-dialogue {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.add-item-dialogue-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+#add-item-btn {
+    margin-top: 100px;
+}
+
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.add-item-dialogue-header {
+  padding: 15px 16px;
+  border-bottom: 1px solid grey;
+  color: black;
+}
+
+.add-item-dialogue-body {
+    padding: 2px 16px;
+}
+
+.priorities {
+    word-wrap: break-word;
+}
+
+[type="checkbox"] {
+    vertical-align: middle;
+}
+
+.space-between {
+    margin-left: 10px;
+}
+
+#todo-list {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+#todo-list li {
+    position: relative;
+    list-style: none;
+    height: 45px;
+    line-height: 45px;
+    margin-bottom: 8px;
+    background: #f2f2f2;
+    border-radius: 3px;
+    padding: 0 15px;
+    cursor: default;
+    overflow: hidden;
+}
+
+#todo-list li .icon {
+    position: absolute;
+    right: -45px;
+    background: #e74c3c;
+    width: 45px;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 3px 3px 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#todo-list li:hover .icon {
+    right: 0px;
+}
