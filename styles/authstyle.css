@@ -187,7 +187,7 @@ header .navigation .menu-list li a {
     width: 150px;
     height: 30px;
     margin-top: 100px;
-    margin-left: 20px;
+    margin-left: 10px;
     color: #000000;
     background: #ffffff;
     font-weight: bold;
@@ -200,16 +200,17 @@ header .navigation .menu-list li a {
     background: #000000;
 }
 
-#search-btn {
-    width: 140px;
+#search-btn, #reset-btn, #delete-selected-btn {
+    width: 134px;
     height: 30px;
     margin: 0px;
-    margin-left: 30px;
+    margin-left: 10px;
 }
 
 #search-form {
+    height: 50px;
+    margin-top: 20px;
     margin-left: 20px;
-    margin-bottom: 5px;
     color: #000000;
     display: flex;
     flex-direction: row;
@@ -314,6 +315,7 @@ header .navigation .menu-list li a {
 }
 
 #todo-list {
+    margin
     max-height: 250px;
     overflow-y: auto;
 }

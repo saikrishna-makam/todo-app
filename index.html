@@ -115,7 +115,7 @@
             
             <h3>Todo List</h3>
             
-            <div id="search-form" role="search">
+            <form id="search-form" role="search">
                 <div class="row">
                     <label for="date">From</label>
                         <input id="search-from-date" type="date" name="date">
@@ -147,9 +147,15 @@
                     <label for="task-done">Pending</label>
                 </div>     
                 <div class="row">           
-                    <button id="search-btn" class="icon-btn" onclick="showTodoList()"><span><i class="fa fa-search" style="font-size: 13px;"></i></span> Search</button>
+                    <button id="search-btn" type="button" class="icon-btn" onclick="showTodoList()"><span><i class="fa fa-search" style="font-size: 13px;"></i></span> Search</button>
                 </div>
-            </div> 
+                <div class="row">           
+                    <button id="reset-btn" class="icon-btn" type="button" onclick="resetTodoList()"><span><i class="fa fa-close" style="font-size: 13px;"></i></span> Reset</button>
+                </div>
+                <div class="row">           
+                    <button id="delete-selected-btn" type="button" class="icon-btn" onclick="deleteSelectedItems()"><span><i class="fa fa-trash" style="font-size: 13px;"></i></span> Delete Selected</button>
+                </div>
+            </form> 
             
             <ul id="todo-list">
                 

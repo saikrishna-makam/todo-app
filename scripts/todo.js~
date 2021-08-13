@@ -15,7 +15,6 @@ function showTodoList() {
     let doSoon = document.getElementById("search-do-soon").checked; 
     let done = document.getElementById("search-task-done").checked;
     let pending = document.getElementById("search-task-pending").checked;
-    
     let splitFromDate = fromDate.split("-");
     let splitToDate = toDate.split("-");
     
@@ -43,7 +42,6 @@ function showTodoList() {
             pendingVal = (new Date() > elementDateObj);
 
             if((fromDateObj <= elementDateObj && elementDateObj <= toDateObj) && (doNow === priority.includes("do-now")) && (doTomorrow === priority.includes("do-tomorrow")) && (doSoon === priority.includes("do-soon")) && (done === (doneVal === "yes")) && (pending === pendingVal)) {
-                alert("if");
                 if(doneVal === "yes") {
                     listTag += `<li><input class="task-done" type="checkbox" checked>${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
                 } else {
@@ -53,13 +51,12 @@ function showTodoList() {
                 return;
         });
     } else if((fromDate === "" || toDate === "") || (todoList.length === 0 && listTag === "")) {
-        alert("else");
         todoList.forEach((element, index) => {
 
             if(element.done === "yes") {
-                listTag += `<li><input class="task-done" type="checkbox" checked>${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
+                listTag += `<li id="todo-item${index}" onclick="selectItem(${index})"><input class="task-done" type="checkbox" checked>${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
             } else {
-                listTag += `<li><input class="task-done" type="checkbox">${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
+                listTag += `<li id="todo-item${index}" onclick="selectItem(${index})"><input class="task-done" type="checkbox">${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
             }
         });
     }
@@ -67,6 +64,31 @@ function showTodoList() {
 }
 
 showTodoList();
+
+function resetTodoList() {
+    document.getElementById("search-form").reset();
+    showTodoList();
+}
+
+var selectedItems = [];
+
+function selectItem(index) {
+    if(!selectedItems.includes(index)) {
+        document.getElementById("todo-item" + index).style.backgroundColor = "#ddd";
+        selectedItems.push(index);
+    } else {
+        document.getElementById("todo-item" + index).style.backgroundColor = "#fff";
+        selectedItems.splice(index, 1);
+    }
+}
+
+function deleteSelectedItems() {   
+    for(let index = 0; index < selectedItems.length; index++) {
+        currentUserData["todos"].splice(index, 1);
+    }
+    showTodoList();
+    selectedItems = [];
+}
 
 addTaskBtn.onclick = function() {
     addTaskDialogue.style.display = "block";
