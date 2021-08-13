@@ -24,7 +24,7 @@
                 </div>
             </nav>
             
-            <button id="add-item-btn"><span><i class="fa fa-plus" style="font-size: 11px"></i></span> Add Task</button>
+            <button id="add-item-btn" class="icon-btn"><span><i class="fa fa-plus" style="font-size: 11px"></i></span> Add Task</button>
             
             <div id="add-item-dialogue" class="add-item-dialogue">
                 <div class="add-item-dialogue-content">
@@ -114,6 +114,43 @@
             </div>
             
             <h3>Todo List</h3>
+            
+            <form id="search-form" role="search">
+                <div class="row">
+                    <label for="date">From</label>
+                        <input id="search-from-date" type="date" name="date">
+                </div>
+                <div id="to-date-row" class="row">
+                    <label for="date">To</label>
+                        <input id="search-to-date" type="date" name="date">
+                </div>
+                <div class="row priorities">
+                    <label class="space-between" for="do-now">
+                        <input id="search-do-now" type="checkbox" value="do-now" name="priority">
+                        Do now
+                    </label>
+                    <label class="space-between" for="do-tomorrow">
+                        <input id="search-do-tomorrow" type="checkbox" value="do-tomorrow" name="priority">
+                        Do tomorrow
+                    </label>
+                    <label class="space-between" for="do-soon">
+                        <input id="search-do-soon" type="checkbox" value="do-soon" name="priority">
+                        Do soon
+                    </label>
+                </div>
+                <div class="row">
+                    <input id="search-task-done" type="checkbox" class="space-between" value="task-done" name="task-done">
+                    <label for="task-done">Done</label>
+                </div>
+                <div class="row">
+                    <input id="search-task-pending" type="checkbox" class="space-between" value="task-pending" name="task-pending">
+                    <label for="task-done">Pending</label>
+                </div>     
+                <div class="row">           
+                    <button id="search-btn" class="icon-btn" onclick="showTodoList()"><span><i class="fa fa-search" style="font-size: 13px;"></i></span> Search</button>
+                </div>
+            </form> 
+            
             <ul id="todo-list">
                 
             </ul>

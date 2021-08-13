@@ -6,26 +6,68 @@ var addTaskDialogue = document.getElementById("add-item-dialogue");
 var addTaskBtn = document.getElementById("add-item-btn");
 var span = document.getElementsByClassName("close")[0];
 
+
 function showTodoList() {
+    alert("new");
+    let fromDate = document.getElementById("search-from-date").value; 
+    let toDate = document.getElementById("search-to-date").value; 
+    let doNow = document.getElementById("search-do-now").checked;
+    let doTomorrow = document.getElementById("search-do-tomorrow").checked;
+    let doSoon = document.getElementById("search-do-soon").checked; 
+    let done = document.getElementById("search-task-done").checked;
+    let pending = document.getElementById("search-task-pending").checked;
+    
+    let splitFromDate = fromDate.split("-");
+    let splitToDate = toDate.split("-");
+    
+    let fromDateObj = new Date(splitFromDate[0], splitFromDate[1] - 1, splitFromDate[2]).getTime();
+    let toDateObj = new Date(splitToDate[0], splitToDate[1] - 1, splitToDate[2]).getTime();
+    
     var todoList = [];
     if(currentUserData['todos']) {
         todoList = currentUserData['todos'];
     }
     
     let listTag = "";
-    todoList.forEach((element, index) => {
+    
+    var splitElementDate;
+    var elementDateObj;
+    var priority;
+    var doneVal;
+    
+    if(fromDate !== "" || toDate !== "") {
+        todoList.forEach((element, index) => {
+            splitElementDate = element["date"].split("-");
+            elementDateObj = new Date(splitElementDate[0], splitElementDate[1] - 1, splitElementDate[2]).getTime();
+            priority = element["priority"];
+            doneVal = element["done"];
+            pendingVal = (new Date() > elementDateObj);
 
-        if(element.done === "yes") {
-            listTag += `<li><input class="task-done" type="checkbox" checked>${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
-        } else {
-            listTag += `<li><input class="task-done" type="checkbox">${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
-        }
-    });
+            if((fromDateObj <= elementDateObj && elementDateObj <= toDateObj) && (doNow === priority.includes("do-now")) && (doTomorrow === priority.includes("do-tomorrow")) && (doSoon === priority.includes("do-soon")) && (done === (doneVal === "yes")) && (pending === pendingVal)) {
+                alert("if");
+                if(doneVal === "yes") {
+                    listTag += `<li><input class="task-done" type="checkbox" checked>${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
+                } else {
+                    listTag += `<li><input class="task-done" type="checkbox">${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
+                }
+            } else
+                return;
+        });
+    } else if((fromDate === "" || toDate === "") || (todoList.length === 0 && listTag === "")) {
+        alert("else");
+        todoList.forEach((element, index) => {
+
+            if(element.done === "yes") {
+                listTag += `<li><input class="task-done" type="checkbox" checked>${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
+            } else {
+                listTag += `<li><input class="task-done" type="checkbox">${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
+            }
+        });
+    }
     todoListView.innerHTML = listTag;
 }
 
 showTodoList();
-
 
 addTaskBtn.onclick = function() {
     addTaskDialogue.style.display = "block";
