@@ -24,16 +24,17 @@
                 </div>
             </nav>
             
-            <button id="add-item-btn">Open Modal</button>
-
+            <button id="add-item-btn"><span><i class="fa fa-plus" style="font-size: 11px"></i></span> Add Task</button>
+            
             <div id="add-item-dialogue" class="add-item-dialogue">
                 <div class="add-item-dialogue-content">
                     <div class="add-item-dialogue-header">
                         <span class="close">&times;</span>
-                        <h2>Add Task</h2>
+                        <h2 id="dialogue-title">Add Task</h2>
                     </div>
-                    <form name="signupform" action="index.html" onsubmit="addTodoTask()">
+                    <form id="taskform" name="taskform" action="index.html" onsubmit="addTodoTask()">
                         <div class="add-item-dialogue-body">                      
+                            <input id="index" type="hidden">
                             <div class="row first-row">
                                 <label for="title">Title</label>
                                 <input id="title" type="text" placeholder="Enter your todo" name="title">
@@ -63,11 +64,11 @@
                                 <div id="radio-group">
                                     Public
                                     <label class="space-between" for="public">
-                                        <input id="public-yes" type="radio" value="Yes" name="public" checked>
+                                        <input id="public-yes" type="radio" value="public-yes" name="public" checked>
                                         Yes
                                     </label>
                                     <label class="space-between" for="public">
-                                        <input id="public-no" type="radio" value="No" name="public">
+                                        <input id="public-no" type="radio" value="public-no" name="public">
                                         No
                                     </label>
                                 </div>
@@ -76,11 +77,11 @@
                                 <div id="radio-group">
                                     Reminder
                                     <label class="space-between" for="reminder">
-                                        <input id="reminder-yes" type="radio" value="Yes" onchange="hideReminderDate()" name="reminder" checked>
+                                        <input id="reminder-yes" type="radio" value="reminder-yes" onchange="hideReminderDate()" name="reminder" checked>
                                         Yes
                                     </label>
                                     <label class="space-between" for="reminder">
-                                        <input id="reminder-no" type="radio" onchange="hideReminderDate()" value="No" name="reminder">
+                                        <input id="reminder-no" type="radio" onchange="hideReminderDate()" value="reminder-no" name="reminder">
                                         No
                                     </label>
                                 </div>
@@ -93,7 +94,7 @@
                             </div>
                             <div class="row">
                                 <label for="task-done">Done</label>
-                                <input id="task-done" type="checkbox" class="space-between" value="Yes" name="task-done">
+                                <input id="task-done" type="checkbox" class="space-between" value="task-done" name="task-done">
                             </div>
                             <div class="row">
                                 <label for="upload-file">Upload file</label>
@@ -106,17 +107,16 @@
                                 <img id="preview-img" src="http://placehold.it/180" alt="User Picture" name="user-img"/>
                             </div>
                             <hr>
-                            <button class="button" type="submit">Add</button>
+                            <button id="dialogue-btn" class="button" type="submit" value="add">Add</button>
                         </div>
                     </form>
                 </div>
             </div>
             
+            <h3>Todo List</h3>
             <ul id="todo-list">
                 
             </ul>
-            
-            
         </header>
         <script src="scripts/authscript.js"></script>
         <script src="scripts/todo.js"></script>
