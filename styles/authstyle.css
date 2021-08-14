@@ -35,8 +35,10 @@ hr {
 }
 
 .button {
-    background-color: #04AA6D;
+    background-color: #5cb85c;;
     color: white;
+    font-size: 15px;
+    font-weight: bold;
     padding: 16px 20px;
     margin: 8px 0px;
     border: none;
@@ -106,7 +108,7 @@ header .navigation .logo {
 }
 
 header .navigation .logo h1 {
-  color: #b1d4e0;
+  color: #ffffff;
   font-size: 30px;
   line-height: 38px;
 }
@@ -131,8 +133,8 @@ header .navigation .humbarger .bar {
  }
 
 header .navigation .menu-list li a {
-  color: #b1d4e0;
-  font-size: 1.25rem;
+  color: #ffffff;
+  font-size: 1.20rem;
   letter-spacing: 2px;
   padding: 14px 16px;
   cursor: pointer;
@@ -195,16 +197,29 @@ header .navigation .menu-list li a {
     border-radius: 5px;
 }
 
-.icon-btn:hover {
-    color: #ffffff;
-    background: #000000;
-}
-
 #search-btn, #reset-btn, #delete-selected-btn {
     width: 134px;
     height: 30px;
     margin: 0px;
     margin-left: 10px;
+}
+
+#add-item-btn:hover, #search-btn:hover {
+    border: none;
+    color: #ffffff;
+    background-color: #5cb85c;
+}
+
+#reset-btn:hover {
+    border: none;
+    color: #ffffff;
+    background-color: #f0ad4e;
+}
+
+#delete-selected-btn:hover {
+    border: none;
+    color: #ffffff;
+    background-color: #d9534f;
 }
 
 #search-form {
@@ -224,20 +239,6 @@ header .navigation .menu-list li a {
     height: 100%;
     width: 100%;
     padding: 6px 10px;
-}
-
-#search-button {
-    cursor: pointer;
-    width: 120px;
-    height: 44px;
-}
-
-#search-button svg {
-    color: #000000;
-    fill: currentColor;
-    width: 24px;
-    height: 24px;
-    padding: 3px;
 }
 
 .add-item-dialogue {

@@ -83,7 +83,6 @@ function storeUserData() {
     user["lastname"] = lastname.value;
     user["gender"] = gender;
     user["address"] = address.value;
-    alert(firstname.value);
     if(password != null) {
         user["password"] = password.value;
     } else {

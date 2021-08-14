@@ -150,7 +150,7 @@
                     <button id="search-btn" type="button" class="icon-btn" onclick="showTodoList()"><span><i class="fa fa-search" style="font-size: 13px;"></i></span> Search</button>
                 </div>
                 <div class="row">           
-                    <button id="reset-btn" class="icon-btn" type="button" onclick="resetTodoList()"><span><i class="fa fa-trash" style="font-size: 13px;"></i></span> Reset</button>
+                    <button id="reset-btn" class="icon-btn" type="button" onclick="resetTodoList()"><span><i class="fa fa-close" style="font-size: 13px;"></i></span> Reset</button>
                 </div>
                 <div class="row">           
                     <button id="delete-selected-btn" type="button" class="icon-btn" onclick="deleteSelectedItems()"><span><i class="fa fa-trash" style="font-size: 13px;"></i></span> Delete Selected</button>
