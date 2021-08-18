@@ -24,7 +24,7 @@
                 <button class="button" type="submit">Sign in</button>
             </div>
             <div class="container signin">
-                <p>Already have an account? <a href="login.html">Sign in</a>.</p>
+                <p>Don't have an account? <a href="register.html">Sign up</a>.</p>
             </div>
         </form>
         <script src="scripts/authscript.js"></script>

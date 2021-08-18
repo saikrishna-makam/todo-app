@@ -7,9 +7,10 @@ var addTaskBtn = document.getElementById("add-item-btn");
 var span = document.getElementsByClassName("close")[0];
 
 
-function showTodoList() {
+function showTodoList() {   
+    let sortSelectValue = document.getElementById("sort-select"); 
     let fromDate = document.getElementById("search-from-date").value; 
-    let toDate = document.getElementById("search-to-date").value; 
+    let toDate = document.getElementById("search-to-date").value;   
     let doNow = document.getElementById("search-do-now").checked;
     let doTomorrow = document.getElementById("search-do-tomorrow").checked;
     let doSoon = document.getElementById("search-do-soon").checked; 
@@ -21,9 +22,11 @@ function showTodoList() {
     let fromDateObj = new Date(splitFromDate[0], splitFromDate[1] - 1, splitFromDate[2]).getTime();
     let toDateObj = new Date(splitToDate[0], splitToDate[1] - 1, splitToDate[2]).getTime();
     
+    let userData = JSON.parse(localStorage.getItem(currentUser));
+    
     var todoList = [];
-    if(currentUserData['todos']) {
-        todoList = currentUserData['todos'];
+    if(userData['todos']) {
+        todoList = userData['todos'];
     }
     
     let listTag = "";
@@ -32,6 +35,23 @@ function showTodoList() {
     var elementDateObj;
     var priority;
     var doneVal;
+    
+    document.getElementById("todolist-error").innerHTML = "";
+    
+    if(sortSelectValue.value === "due-date") {
+        todoList.sort(function(task1, task2) { 
+            splitTask1Date = task1["date"].split("-");
+            splitTask2Date = task2["date"].split("-");
+            return new Date(task1["date"]) - new Date(task2["date"]);
+        });
+    } else if(sortSelectValue.value === "priority") {
+        var prioritySorting = {};
+        prioritySorting["do-now"] = 1;
+        prioritySorting["do-tomorrow"] = 2;
+        prioritySorting["do-soon"] = 3;
+        prioritySorting[""] = 4;
+        todoList.sort((task1, task2)=>prioritySorting[(task1.priority.split(" "))[0]] - prioritySorting[(task2.priority.split(" "))[0]]);
+    }
     
     if(fromDate !== "" || toDate !== "") {
         todoList.forEach((element, index) => {
@@ -43,9 +63,9 @@ function showTodoList() {
 
             if((fromDateObj <= elementDateObj && elementDateObj <= toDateObj) && (doNow === priority.includes("do-now")) && (doTomorrow === priority.includes("do-tomorrow")) && (doSoon === priority.includes("do-soon")) && (done === (doneVal === "yes")) && (pending === pendingVal)) {
                 if(doneVal === "yes") {
-                    listTag += `<li><input class="task-done" type="checkbox" checked>${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
+                    listTag += `<li id="todo-item${element.index}" onclick="selectItem(${element.index})"><input class="task-done" type="checkbox" checked>${element.title}<span class="edit-icon" onclick="editTodoTask(${element.index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${element.index})"><i class="fa fa-trash"></i></span></li>`;
                 } else {
-                    listTag += `<li><input class="task-done" type="checkbox">${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
+                    listTag += `<li id="todo-item${element.index}" onclick="selectItem(${element.index})"><input class="task-done" type="checkbox">${element.title}<span class="edit-icon" onclick="editTodoTask(${element.index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${element.index})"><i class="fa fa-trash"></i></span></li>`;
                 }
             } else
                 return;
@@ -54,16 +74,34 @@ function showTodoList() {
         todoList.forEach((element, index) => {
 
             if(element.done === "yes") {
-                listTag += `<li id="todo-item${index}" onclick="selectItem(${index})"><input class="task-done" type="checkbox" checked>${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
+                listTag += `<li id="todo-item${element.index}" onclick="selectItem(${element.index})"><input class="task-done" type="checkbox" checked>${element.title}<span class="edit-icon" onclick="editTodoTask(${element.index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${element.index})"><i class="fa fa-trash"></i></span></li>`;
             } else {
-                listTag += `<li id="todo-item${index}" onclick="selectItem(${index})"><input class="task-done" type="checkbox">${element.title}<span class="edit-icon" onclick="editTodoTask(${index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${index})"><i class="fa fa-trash"></i></span></li>`;
+                listTag += `<li id="todo-item${element.index}" onclick="selectItem(${element.index})"><input class="task-done" type="checkbox">${element.title}<span class="edit-icon" onclick="editTodoTask(${element.index})"><i class="fa fa-edit"></i></span><span class="delete-icon" onclick="deleteTodoTask(${element.index})"><i class="fa fa-trash"></i></span></li>`;
             }
         });
     }
+    
+    if(listTag === "")
+        document.getElementById("todolist-msg").innerHTML = "No task found.";
+    else 
+        document.getElementById("todolist-msg").innerHTML = "";
+    
     todoListView.innerHTML = listTag;
 }
 
 showTodoList();
+
+function searchTodoList() {
+    let fromDate = document.getElementById("search-from-date").value; 
+    let toDate = document.getElementById("search-to-date").value; 
+    if(fromDate === "" || toDate === "") {
+        todoListView.innerHTML = "";
+        document.getElementById("todolist-error").innerHTML = "Please choose valid date range.";
+        document.getElementById("todolist-msg").innerHTML = "";
+        return;
+    }
+    showTodoList();
+}
 
 function resetTodoList() {
     document.getElementById("search-form").reset();
@@ -83,11 +121,25 @@ function selectItem(index) {
 }
 
 function deleteSelectedItems() {   
+    console.log("selectedItems: ");
     for(let index = 0; index < selectedItems.length; index++) {
-        currentUserData["todos"].splice(index, 1);
+        console.log(selectedItems[index]);
     }
-    showTodoList();
+    let todoList = currentUserData['todos'];
+    for(let index = 0; index < selectedItems.length; index++) {
+        for(let i = 0; i < todoList.length; i++) {
+            if(todoList[i].index == selectedItems[index]) {
+                todoList.splice(i, 1);
+            }
+        }
+    }
+    localStorage.setItem(currentUserData.email, JSON.stringify(currentUserData));
     selectedItems = [];
+    showTodoList();
+}
+
+function sortTodoList() {
+    showTodoList();
 }
 
 addTaskBtn.onclick = function() {
@@ -95,7 +147,8 @@ addTaskBtn.onclick = function() {
     document.getElementById("dialogue-title").innerHTML = "Add Task";
     document.getElementById("dialogue-btn").innerHTML = "Add";
     document.getElementById("taskform").reset();
-    document.getElementById("preview-img").src = "http://placehold.it/180"; 
+    document.getElementById("preview-img").src = "images/task-image.jpg"
+    document.getElementById("upload-file").required = true;
     document.getElementById("index").value = currentUserData["todos"].length;
     var date = document.getElementById("date");
     var reminderDate = document.getElementById("reminder-date");
@@ -142,21 +195,40 @@ function editTodoTask(index) {
     addTaskDialogue.style.display = "block";
     document.getElementById("dialogue-title").innerHTML = "Edit Task";
     document.getElementById("dialogue-btn").innerHTML = "Save";
+    document.getElementById("upload-file").required = false;
     let todoList = currentUserData['todos'];
-    document.getElementById("index").value = index;
-    document.getElementById("title").value = todoList[index].title;
-    document.getElementById("date").value = todoList[index].date;
-    let priorities = todoList[index].priority.split(" ");
-    for(let i = 0; i < priorities.length; i++) {
+    let todoItem;
+    for(let i = 0; i < todoList.length; i++) {
+        if(todoList[i].index == index) {
+            todoItem = todoList[i];
+            break;
+        }
+    }
+    document.getElementById("index").value = todoItem.index;
+    document.getElementById("title").value = todoItem.title;
+    document.getElementById("date").value = todoItem.date;
+    let prioritiesLen = 0;
+    let priorities;
+    let priorityChecks = document.getElementsByName("priority");
+    for(let i = 0; i < priorityChecks.length; i++) {
+        priorityChecks[i].checked = false;
+    } 
+    if(todoItem.priority !== "") {
+        priorities = todoItem.priority.split(" ");
+        prioritiesLen = priorities.length;
+    }
+    console.log("priorities: ");
+    for(let i = 0; i < prioritiesLen; i++) {
+        console.log(priorities[i]);
         document.getElementById(priorities[i]).checked = true;
     } 
-    document.getElementById(todoList[index]["public"]).checked = true;
-    document.getElementById(todoList[index].reminder).checked = true;
+    document.getElementById(todoItem["public"]).checked = true;
+    document.getElementById(todoItem.reminder).checked = true;
     let reminderDate = document.getElementById("reminder-date");
     let today = new Date();
     let todayStr = today.toISOString().substr(0, 10);
-    if(todoList[index].reminder == "reminder-yes") {
-        reminderDate.value = todoList[index].reminderdate;    
+    if(todoItem.reminder == "reminder-yes") {
+        reminderDate.value = todoItem.reminderdate;    
         reminderDate.readOnly = false;
         reminderDate.style.opacity = 1;
     } else {
@@ -164,12 +236,15 @@ function editTodoTask(index) {
         reminderDate.readOnly = true;
         reminderDate.style.opacity = 0.4;
     }   
-    if(todoList[index].done == "yes")
+    document.getElementById("task-done").checked = false;
+    if(todoItem.done == "yes") {        
         document.getElementById("task-done").checked = true;
-    document.getElementById("preview-img").src = todoList[index].taskimageurl;
+    }
+    document.getElementById("preview-img").src = todoItem.taskimageurl;
 }
 
 function addTodoTask() {
+    var index = document.getElementById("index");
     var title = document.getElementById("title");
     var date = document.getElementById("date");
     var priority = (function() {
@@ -203,12 +278,12 @@ function addTodoTask() {
     var taskimage = document.getElementById("preview-img");
     
     var task = {};
-    
     task["title"] = title.value;
     task["date"] = date.value;
     task["priority"] = priority;
     task["public"] = todoPublic;
     task["reminder"] = reminder;
+    task["index"] = index.value;
     if(reminder == "reminder-yes")
         task["reminderdate"] = reminderDate.value;
     else
@@ -219,9 +294,11 @@ function addTodoTask() {
     if(!currentUserData['todos']) {
         currentUserData['todos'] = [];
     }
+    
     currentUserData['todos'][parseInt(document.getElementById("index").value)] = task;
     
     try {
+        
         localStorage.setItem(currentUserData.email, JSON.stringify(currentUserData));
     } catch(e) {
         console.log("Storage failed: " + e);
@@ -229,7 +306,13 @@ function addTodoTask() {
 }
 
 function deleteTodoTask(index) {
-    currentUserData['todos'].splice(index, 1);
+    let todoList = currentUserData['todos'];
+    for(let i = 0; i < todoList.length; i++) {
+        if(todoList[i].index == index) {
+            todoList.splice(i, 1);
+            break;
+        }
+    }
     localStorage.setItem(currentUserData.email, JSON.stringify(currentUserData));
     showTodoList();
 }

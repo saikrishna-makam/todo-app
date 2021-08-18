@@ -223,8 +223,8 @@ header .navigation .menu-list li a {
 }
 
 #search-form {
-    height: 50px;
-    margin-top: 20px;
+    height: 30px;
+    margin-top: 30px;
     margin-left: 20px;
     color: #000000;
     display: flex;
@@ -316,9 +316,19 @@ header .navigation .menu-list li a {
 }
 
 #todo-list {
-    margin
+    margin-top: 15px;
     max-height: 250px;
     overflow-y: auto;
+}
+
+.todolist-message {
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+#todolist-msg {
+    color: #0000CD;
+    font-size: 90%;
 }
 
 #todo-list li {
@@ -383,4 +393,14 @@ h3 {
     margin: 0px 20px;
     margin-bottom: 15px;
     text-transform: uppercase;
+}
+
+#sort-select-row {
+    margin-left: 20px;
+}
+
+#sort-select {
+    width: 160px;
+    height: 25px;
+    font-size: 15px;
 }

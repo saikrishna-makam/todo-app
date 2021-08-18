@@ -37,12 +37,12 @@
                             <input id="index" type="hidden">
                             <div class="row first-row">
                                 <label for="title">Title</label>
-                                <input id="title" type="text" placeholder="Enter your todo" name="title">
+                                <input id="title" type="text" placeholder="Enter your todo" name="title" required>
                             </div>
                             <div class="row">
-                                <label for="date">Date</label>
+                                <label for="date">Due Date</label>
                                 <div>
-                                    <input id="date" type="date" name="date">
+                                    <input id="date" type="date" name="date" required>
                                 </div>
                             </div>
                             <div class="row priorities">
@@ -99,12 +99,12 @@
                             <div class="row">
                                 <label for="upload-file">Upload file</label>
                                 <div>
-                                    <input id="upload-file" type="file" accept="image/*" onchange="readURL(this);" name="upload-file"/>
+                                    <input id="upload-file" type="file" accept="image/*" onchange="readURL(this);" name="upload-file" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div id="preview-label">Preview</div>
-                                <img id="preview-img" src="http://placehold.it/180" alt="User Picture" name="user-img"/>
+                                <img id="preview-img" src="images/task-image.jpg" alt="User Picture" name="user-img"/>
                             </div>
                             <hr>
                             <button id="dialogue-btn" class="button" type="submit" value="add">Add</button>
@@ -115,14 +115,14 @@
             
             <h3>Todo List</h3>
             
-            <form id="search-form" role="search">
+            <form id="search-form" action="">
                 <div class="row">
                     <label for="date">From</label>
-                        <input id="search-from-date" type="date" name="date">
+                    <input id="search-from-date" type="date" name="date">
                 </div>
                 <div id="to-date-row" class="row">
                     <label for="date">To</label>
-                        <input id="search-to-date" type="date" name="date">
+                    <input id="search-to-date" type="date" name="date">
                 </div>
                 <div class="row priorities">
                     <label class="space-between" for="do-now">
@@ -147,19 +147,28 @@
                     <label for="task-done">Pending</label>
                 </div>     
                 <div class="row">           
-                    <button id="search-btn" type="button" class="icon-btn" onclick="showTodoList()"><span><i class="fa fa-search" style="font-size: 13px;"></i></span> Search</button>
+                    <button id="search-btn" type="button" class="icon-btn" onclick="searchTodoList()"><span><i class="fa fa-search" style="font-size: 13px;"></i></span> Search</button>
                 </div>
                 <div class="row">           
                     <button id="reset-btn" class="icon-btn" type="button" onclick="resetTodoList()"><span><i class="fa fa-close" style="font-size: 13px;"></i></span> Reset</button>
                 </div>
                 <div class="row">           
-                    <button id="delete-selected-btn" type="button" class="icon-btn" onclick="deleteSelectedItems()"><span><i class="fa fa-trash" style="font-size: 13px;"></i></span> Delete Selected</button>
+                    <button id="delete-selected-btn" type="submit" class="icon-btn" onclick="deleteSelectedItems()"><span><i class="fa fa-trash" style="font-size: 13px;"></i></span> Delete Selected</button>
                 </div>
             </form> 
-            
+            <div id="sort-select-row">
+                <label for="sort-select">Sort</label>
+                <select id="sort-select" size="1" name="sort-select" onchange="sortTodoList()">
+                        <option value="default">Select...</option>
+                        <option value="due-date">Due Date</option>
+                        <option value="priority">Priority</option>
+                </select>   
+            </div>        
             <ul id="todo-list">
                 
             </ul>
+            <div id="todolist-msg" class="todolist-message"></div>
+            <div id="todolist-error" class="error todolist-message"></div>
         </header>
         <script src="scripts/authscript.js"></script>
         <script src="scripts/todo.js"></script>

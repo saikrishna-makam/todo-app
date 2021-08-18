@@ -11,17 +11,16 @@
                 <hr>
                 <div class="row first-row">
                     <label for="email">Email</label>
-                    <input id="email" type="text" placeholder="Enter Email Id" name="email">
+                    <input id="email" type="text" placeholder="Enter Email Id" name="email" required>
                     <div class="error" id="signupemailerror"></div>
                 </div>
                 <div class="row">
                     <label for="firstname">First name</label>
-                    <input id="firstname" type="text" placeholder="Enter First Name" name="firstname" >
+                    <input id="firstname" type="text" placeholder="Enter First Name" name="firstname" required>
                 </div>
                 <div class="row">
-                    <label for="lastname">Last name</label>
-                
-                    <input id="lastname" type="text" placeholder="Enter Last Name" name="lastname" >
+                    <label for="lastname">Last name</label>               
+                    <input id="lastname" type="text" placeholder="Enter Last Name" name="lastname" required>
                 </div>
                 <div class="row">
                     <div id="radio-group">
@@ -40,18 +39,18 @@
                 <textarea id="address" name="address" rows="4" cols="50" required></textarea>
                 <div class="row">
                     <label for="password">Password</label>
-                    <input id="password" type="password" placeholder="Enter Password" name="password">
+                    <input id="password" type="password" placeholder="Enter Password" name="password" required>
                     <div class="error" id="signuppassworderror"></div>
                 </div>
                 <div class="row">
                     <label for="confirm-password">Confirm Password</label>
-                    <input id="confirm-password" type="password" placeholder="Enter Password Again" name="confirmpassword">
+                    <input id="confirm-password" type="password" placeholder="Enter Password Again" name="confirmpassword" required>
                     <div class="error" id="signupconfirmpassworderror"></div>
                 </div>
                 <div class="row">
                     <label for="upload-file">Upload file</label>
                     <div>
-                        <input type="file" accept="image/*"  onchange="readURL(this);"/>
+                        <input type="file" accept="image/*"  onchange="readURL(this);" required>
                     </div>
                 </div>
                 <div class="row">
